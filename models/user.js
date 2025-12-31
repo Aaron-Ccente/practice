@@ -1,0 +1,43 @@
+import { db } from "../database/db.js";
+
+export default class User {
+    // Funcion modelo User para obtener todos los usuarios
+  static async getAll() {
+    try {
+      const query = `SELECT name, lastname, email, phone, age FROM users`;
+      const [response] = await db.promise().query(query);
+      if(response.length === 0){
+        return {success: true, message: "No hay datos en la tabla de usuarios."}
+      }
+      return {sucess: true, message: "Usuario obtenidos con éxito", data: response};
+    } catch (error) {
+        console.log("Error en getAll del modelo User", error)
+        return {success: false, message: "Error al obtener los datos"}
+    }
+  }
+
+//   Funcion del modelo User para obtener un usuario segun ID
+  static async getUser(id){
+    try {
+        const id_user = id;
+        const query = `SELECT name, lastname, email, phone, age FROM users WHERE users.id = ?`
+        const [response] = await db.promise().query(query, [id_user]);
+        console.log(response)
+        if(response.length === 0){
+            return {
+                success: true, 
+                message: "Usuario no encontrado"
+            }
+        }
+        return {
+            success: true,
+            message: "Usuario obtenido correctamente",
+            data: response
+        }
+
+    } catch (error) {
+        console.log("Error en getUser del modelo Usuario", error.message);
+        return {success: false, message: "Error en getUser"};
+    }
+  }
+}
