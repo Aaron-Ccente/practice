@@ -8,20 +8,20 @@ import { corsOptions } from './config/cors.js';
 const app = express();
 
 // Configuracion para cors base
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Soporte para json en express
 app.use(express.json());
 
 // limite de peticiones a la api por direccion ip
-app.use(rateLimit({
-    windowMs: 15*60*100,
-    max: 10,
-    message: {
-        sucess: false,
-        message: "Demasiadas peticiones, esperar."
-    }
-}))
+// app.use(rateLimit({
+//     windowMs: 15*60*100,
+//     max: 10,
+//     message: {
+//         sucess: false,
+//         message: "Demasiadas peticiones, esperar."
+//     }
+// }))
 
 app.get("/", (_, res)=>{
     return res.status(200).json({success: true, message: "Server run."})
