@@ -4,7 +4,7 @@ export default class User {
   // Funcion modelo User para obtener todos los usuarios
   static async getAll() {
     try {
-      const query = `SELECT name, lastname, email, phone, age FROM users`;
+      const query = `SELECT id, name, lastname, email, phone, age FROM users`;
       const [response] = await db.promise().query(query);
       if (response.length === 0) {
         return {
@@ -27,7 +27,7 @@ export default class User {
   static async getUser(id) {
     try {
       const id_user = id;
-      const query = `SELECT name, lastname, email, phone, age FROM users WHERE users.id = ?`;
+      const query = `SELECT id, name, lastname, email, phone, age FROM users WHERE users.id = ?`;
       const [response] = await db.promise().query(query, [id_user]);
       console.log(response);
       if (response.length === 0) {
