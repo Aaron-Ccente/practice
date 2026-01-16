@@ -1,15 +1,14 @@
 import { Router } from "express";
-// import AuthRoutes from './auth.routes.js'
 import UserRoutes from './user.routes.js'
-
+import AuthRoutes from './auth.routes.js'
 
 const router = Router();
 
 // Ruta para login de usuarios
-// router.use("/login",AuthRoutes)
+router.use("/auth",AuthRoutes)
 
 // Ruta para creacion de usuarios
-router.use("/user", UserRoutes)
+router.use("/users", UserRoutes)
 
 // Ruta para 
 
